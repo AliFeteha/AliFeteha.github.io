@@ -7,7 +7,7 @@ export const personal = {
   email: "alifetha2002@gmail.com",
   github: "https://github.com/AliFeteha",
   linkedin: "https://www.linkedin.com/in/ali-ibrahim-600520237",
-  portfolio: "#", // TODO: add portfolio URL
+  portfolio: "https://alifeteha.github.io",
   // scholar: "", // TODO: add Google Scholar profile URL (like your co-author has)
   cvFile: "/Ali_Feteha_CV.pdf",
 };

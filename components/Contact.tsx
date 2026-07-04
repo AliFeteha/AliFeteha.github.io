@@ -44,10 +44,10 @@ const channels = [
   },
   {
     label: "Portfolio",
-    value: "Coming soon", // placeholder until portfolio URL is live
+    value: "alifeteha.github.io",
     href: personal.portfolio,
     icon: GlobeIcon,
-    external: false,
+    external: true,
   },
 ];
 
