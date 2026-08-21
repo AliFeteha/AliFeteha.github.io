@@ -105,6 +105,19 @@ export const projects: Project[] = [
     github: "https://github.com/Hedrax/AHDoc",
   },
   {
+    title: "RAG Knowledge-Base Chatbot",
+    subtitle:
+      "Document-grounded AI chatbot with PDF ingestion, vector retrieval, and a FastAPI + Streamlit stack",
+    period: "Feb 2025",
+    tags: ["Python", "LangChain", "ChromaDB", "FastAPI", "Streamlit", "Docker"],
+    bullets: [
+      "Built an end-to-end RAG pipeline: PDF text extraction, embedding, and storage in a ChromaDB vector store for efficient semantic retrieval.",
+      "Supports multiple LLM providers (OpenAI, Gemini, DeepSeek) behind one interface, with answers constrained strictly to the supplied knowledge base to prevent hallucination.",
+      "Packaged as a FastAPI backend with a Streamlit UI, deployable via Python or Docker.",
+    ],
+    github: "https://github.com/AliFeteha/Chatbot",
+  },
+  {
     title: "MBTI Personality Classifier",
     subtitle: "NLP classification system predicting 16 MBTI personality types from social text data",
     period: "Nov 2023 – Jun 2024",
