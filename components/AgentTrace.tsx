@@ -1,11 +1,11 @@
 type Line = { kind: "user" | "step" | "answer" | "cite"; tag?: string; text: string; dir?: "rtl" };
 
 const lines: Line[] = [
-  { kind: "user", text: "ما أحدث اشتراطات تسجيل الطائرات المسيّرة؟", dir: "rtl" },
+  { kind: "user", text: "What are the latest drone registration requirements?" },
   { kind: "step", tag: "router", text: "intent: regulation → regulations_agent" },
   { kind: "step", tag: "search", text: "aviation-regulations index, 14 passages" },
   { kind: "step", tag: "filter", text: "amendment-aware: keep latest version only" },
-  { kind: "step", tag: "translate", text: "en sources → ar answer" },
+  { kind: "step", tag: "rerank", text: "top 4 passages by relevance" },
   { kind: "answer", text: "Grounded answer, 2 citations" },
   { kind: "cite", text: "[1] regulations.pdf, p. 14" },
   { kind: "cite", text: "[2] amendment-03.pdf, p. 2" },
@@ -26,7 +26,7 @@ export default function AgentTrace() {
           {lines.map((l, i) => (
             <li key={i} className="trace-line" style={{ ["--i" as string]: i }}>
               {l.kind === "user" && (
-                <p dir={l.dir} className="rounded-lg bg-bg px-3 py-2 text-right text-[0.95rem] text-ink">
+                <p dir={l.dir} className="rounded-lg bg-bg px-3 py-2 text-[0.95rem] text-ink">
                   {l.text}
                 </p>
               )}
