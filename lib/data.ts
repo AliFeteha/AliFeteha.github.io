@@ -1,369 +1,293 @@
 export const personal = {
   name: "Ali Feteha",
-  role: "AI Engineer",
-  headline: "AI Engineer · Azure AI Engineer Associate · IEEE Published Researcher",
+  role: "AI & Software Engineer",
   location: "Doha, Qatar",
   phone: "+974 7171 1075",
+  phoneHref: "tel:+97471711075",
   email: "alifetha2002@gmail.com",
   github: "https://github.com/AliFeteha",
   linkedin: "https://www.linkedin.com/in/ali-ibrahim-600520237",
-  portfolio: "https://alifeteha.github.io",
-  // scholar: "", // TODO: add Google Scholar profile URL (like your co-author has)
   cvFile: "/Ali_Feteha_CV.pdf",
 };
 
-export const summary = {
-  intro:
-    "I design and ship production-grade AI systems — multi-agent architectures, RAG pipelines over enterprise knowledge, and LLM-powered platforms engineered end-to-end on Azure.",
-  detail:
-    "Microsoft Certified Azure AI Engineer Associate and IEEE-published researcher, with a track record of turning research into products that enterprises actually use — from intelligent search and chatbots to agentic automation.",
-  about: [
-    "My path into AI started with research: my graduation thesis at Egypt-Japan University of Science and Technology tackled Arabic handwritten OCR — one of the hardest scripts to recognize — and reached a 96%+ character recognition rate. The work was published at IEEE NILES 2024 and extended in the Invizo arXiv preprint (2025).",
-    "Today I'm an AI Engineer at Applab in Doha, where I architect and deploy production AI on Azure: multi-agent systems built on Semantic Kernel, RAG pipelines with semantic search over large enterprise knowledge bases, and the data platforms that feed them.",
-    "What drives me is the full journey from paper to product — taking a model that works in a notebook and turning it into a secure, scalable system that real teams rely on every day.",
-  ],
-  specialties: [
-    "Generative & Agentic AI",
-    "Multi-Agent Systems",
-    "RAG & Intelligent Search",
-    "LLM Fine-tuning & Evaluation",
-    "Computer Vision & OCR",
-    "Azure AI Platform Engineering",
-    "NLP",
-    "MLOps",
-  ],
+export const intro = {
+  lead: "I take AI agents from prototype to public launch.",
+  body: "At Applab in Doha I build multi-agent systems, retrieval over large document sets, real-time voice and avatar experiences, and the evaluations that prove they work. Five of those projects are now in production for organisations across Qatar.",
 };
 
-export type ExperienceItem = {
-  company: string;
+export type Delivered = {
+  slug: string;
+  short: string;
+  capabilities: string[];
+  client: string;
+  clientShort: string;
+  project: string;
+  summary: string;
   role: string;
-  period: string;
-  location?: string;
-  bullets: string[];
+  stack: string[];
+  challenge: string;
+  proof: { value: string; label: string };
+  flow: { label: string; tool?: string; agent?: boolean }[];
+  points: string[];
 };
 
-export const experience: ExperienceItem[] = [
+export const delivered: Delivered[] = [
   {
-    company: "Applab",
-    role: "AI Engineer",
-    period: "Apr 2025 – Present",
-    location: "Doha, Qatar",
-    bullets: [
-      "Architected and deployed production AI solutions on Azure (Azure AI Services, Container Apps, Azure AI Search, Azure Functions, Speech Services, Azure Storage), enabling secure, scalable intelligent platforms serving enterprise users.",
-      "Designed multi-agent architectures using Semantic Kernel and agentic AI frameworks, automating complex multi-step enterprise workflows and reducing manual processing time significantly.",
-      "Built RAG pipelines and AI-powered chatbots with intelligent semantic search, improving user engagement and enabling accurate, context-aware responses over large enterprise knowledge bases.",
-      "Engineered data pipelines for structured and unstructured document extraction, web scraping, and knowledge graph construction — powering downstream AI reasoning and retrieval systems.",
-      "Implemented enterprise SharePoint integration using SharePoint SDK and Microsoft Graph API, delivering secure, automated, and scalable data ingestion workflows for AI platforms.",
-      "Led AI proof-of-concept development from requirements gathering through delivery, aligning technical AI capabilities with business objectives and demonstrating ROI to stakeholders.",
-      "Leveraged Copilot Studio and Power Automate to extend AI solutions into Microsoft 365 ecosystems, enabling non-technical teams to interact with intelligent automation workflows.",
+    slug: "qoc-avatar-platform",
+    short: "QOC Avatars",
+    capabilities: ["rag", "voice", "evaluation"],
+    client: "Qatar Olympic Committee",
+    clientShort: "QOC",
+    project: "Multi-Avatar AI Platform",
+    summary:
+      "Talking AI avatars that answer questions about the Committee in real time, handing the conversation between two avatars depending on what the visitor asks.",
+    role: "Built the approved POC, then the production backend",
+    stack: ["LangChain", "Azure OpenAI", "Azure AI Search", "Microsoft Foundry", "Azure AI Speech", "WebRTC", "WebSockets", "REST APIs"],
+    challenge: "Two avatars, one conversation: the system has to understand each question, pick the right avatar, fetch a grounded answer and speak it back without breaking the live session.",
+    proof: { value: "POC → live", label: "Prototype approved by QOC, then rebuilt as the production backend" },
+    flow: [
+      { label: "Visitor asks out loud", tool: "Azure AI Speech" },
+      { label: "Agent picks the avatar", tool: "LangChain, Azure OpenAI", agent: true },
+      { label: "Grounded retrieval", tool: "Azure AI Search, Foundry web search" },
+      { label: "Avatar answers live", tool: "WebRTC, WebSockets" },
+    ],
+    points: [
+      "Built the proof of concept that QOC approved, then designed and implemented the production AI backend: REST APIs, real-time avatar communication and session management.",
+      "Designed agent workflows with LangChain and Azure OpenAI covering dynamic avatar selection, Azure AI Search retrieval and grounded web search through Microsoft Foundry.",
+      "Built the website indexing pipelines and automated evaluations used to measure agent quality.",
+      "Implemented dual-avatar session management and switching over WebRTC and WebSockets, working with the frontend team on query-driven avatar transitions.",
     ],
   },
   {
-    company: "Hassan Aly Hassan Association for Contracting",
-    role: "Accountant & Technical Office Engineer",
-    period: "May 2020 – Feb 2025",
-    location: "Alexandria, Egypt",
-    bullets: [
-      "Managed end-to-end financial operations (payroll, budgeting, asset tracking, bank reconciliation) and coordinated engineering quantity analysis across multiple active construction projects.",
+    slug: "caa-regulations-chatbot",
+    short: "CAA Chatbot",
+    capabilities: ["rag", "multi-agent", "bilingual", "pipelines"],
+    client: "Qatar Civil Aviation Authority",
+    clientShort: "CAA",
+    project: "Public AI Chatbot",
+    summary:
+      "A bilingual public assistant that answers aviation-regulation questions with the latest applicable rule, cited down to the PDF page.",
+    role: "Designed and built the multi-agent system",
+    stack: ["Semantic Kernel", "Azure OpenAI", "Azure AI Search", "Azure Document Intelligence"],
+    challenge: "Aviation regulations are amended often. Quoting a superseded version is worse than not answering, and the public asks in both Arabic and English.",
+    proof: { value: "Page-level", label: "Every answer cites the source regulation and the PDF page" },
+    flow: [
+      { label: "Regulations and site content", tool: "PDFs, web pages" },
+      { label: "Extract, OCR, translate", tool: "Azure Document Intelligence" },
+      { label: "Incremental index", tool: "Azure AI Search" },
+      { label: "Router and 3 specialist agents", tool: "Semantic Kernel, Azure OpenAI", agent: true },
+      { label: "Latest-amendment answer with citations" },
+    ],
+    points: [
+      "Designed a multi-agent assistant in Microsoft Semantic Kernel with specialised agents for aviation regulations, general enquiries and service workflows.",
+      "Engineered amendment-aware legal retrieval that finds the latest applicable regulation and answers with document citations and page references.",
+      "Built automated ingestion and indexing with incremental sync, document extraction, OCR and Arabic translation for bilingual retrieval.",
+    ],
+  },
+  {
+    slug: "qoc-ertibat-agent",
+    short: "QOC Ertibat",
+    capabilities: ["tool-calling", "evaluation"],
+    client: "Qatar Olympic Committee",
+    clientShort: "QOC",
+    project: "Ertibat automation agent",
+    summary:
+      "An agent that carries out real business operations inside the Ertibat platform by calling more than 50 backend tools on the user’s behalf.",
+    role: "Designed and built the agent and its evaluation",
+    stack: ["Microsoft Agent Framework", "Azure OpenAI", "REST APIs"],
+    challenge: "Letting an agent act, not just answer. Every backend expected a different request shape, and a wrong call changes real data.",
+    proof: { value: "50+ tools", label: "Backend operations the agent can run, each verified by automated evaluation" },
+    flow: [
+      { label: "Staff request in chat" },
+      { label: "Agent plans the operation", tool: "Microsoft Agent Framework", agent: true },
+      { label: "Tool call, request shaped", tool: "50+ tools, preprocessing" },
+      { label: "Ertibat backend", tool: "REST APIs" },
+      { label: "Evaluation confirms the change landed" },
+    ],
+    points: [
+      "Built an automation agent with Microsoft Agent Framework, integrating 50+ tools with backend APIs to run operations and workflows in Ertibat.",
+      "Implemented request preprocessing and response transformation so every backend returns structured data the agent can act on reliably.",
+      "Built an end-to-end evaluation framework that checks each tool call and confirms the operation actually landed in the backend.",
+    ],
+  },
+  {
+    slug: "qf-botaina",
+    short: "QF BOTaina",
+    capabilities: ["rag", "permissions", "pipelines"],
+    client: "Qatar Foundation",
+    clientShort: "QF",
+    project: "BOTaina / Maktabi",
+    summary:
+      "An enterprise assistant over SharePoint that only answers from content the person asking is allowed to see.",
+    role: "Took ownership before launch and got it production-ready",
+    stack: ["Copilot Studio", "Microsoft Agent Framework", "Azure Functions", "SharePoint", "Microsoft Graph", "Power Automate", "Power Apps"],
+    challenge: "The assistant was close to launch with critical integration issues, and it had to stop people from seeing documents they don’t have access to.",
+    proof: { value: "Per-user", label: "Answers only from SharePoint content the person asking can open" },
+    flow: [
+      { label: "SharePoint sites", tool: "QF-selected sites" },
+      { label: "Ingest and index at scale", tool: "Azure Functions" },
+      { label: "Check this user’s access", tool: "Microsoft Graph, SharePoint REST, Power Automate" },
+      { label: "Assistant answers", tool: "Copilot Studio, Agent Framework", agent: true },
+    ],
+    points: [
+      "Took over an existing assistant ahead of launch and resolved the critical integration issues across Copilot Studio and the agent components.",
+      "Designed permission-aware retrieval with Microsoft Graph, the SharePoint REST API and Power Automate, so results respect each user’s access rights.",
+      "Scaled the Azure Functions ingestion and indexing pipelines to handle large volumes of content across QF-selected sites.",
+    ],
+  },
+  {
+    slug: "moj-public-assistant",
+    short: "MOJ Assistant",
+    capabilities: ["rag", "voice", "delivery"],
+    client: "Ministry of Justice",
+    clientShort: "MOJ",
+    project: "Public AI Assistant",
+    summary:
+      "A public-facing assistant with chat and avatar modes, launched to citizens by the Ministry.",
+    role: "Led AI engineering delivery",
+    stack: ["Microsoft Agent Framework", "Azure OpenAI", "Azure AI Search", "Azure AI Speech"],
+    challenge: "A government assistant open to every citizen, in chat and as a speaking avatar, with several teams that all had to land on the same launch date.",
+    proof: { value: "Public launch", label: "Led the AI engineering from design reviews through go-live" },
+    flow: [
+      { label: "Citizen types or speaks", tool: "Azure AI Speech" },
+      { label: "Assistant agent", tool: "Microsoft Agent Framework, Azure OpenAI", agent: true },
+      { label: "Retrieval", tool: "Azure AI Search" },
+      { label: "Answer in chat or by avatar" },
+    ],
+    points: [
+      "Led AI engineering: contributed to solution design, reviewed implementations and guided the developers on the team.",
+      "Worked with MOJ stakeholders and cross-functional teams to align requirements, integration approach and delivery.",
+      "Owned AI backend deployments, fixes and enhancements through to the public launch.",
     ],
   },
 ];
 
-export type Project = {
-  title: string;
-  subtitle: string;
-  period: string;
-  tags: string[];
-  bullets: string[];
-  highlight?: string;
-  /** Link to the published paper (rendered as a "Paper" button) */
-  paper?: string;
-  /** Link to an arXiv preprint (rendered as an "arXiv" button) */
-  arxiv?: string;
-  /** Link to the source code (rendered as a "Code" button with GitHub icon) */
-  github?: string;
-  /** Link to a live demo (rendered as a "Live demo" button) */
-  demo?: string;
+export const research = {
+  title: "AHDoc",
+  subtitle: "Arabic handwritten document OCR",
+  period: "Sep 2024 – Feb 2025",
+  summary:
+    "My graduation project at EJUST: an end-to-end system that reads handwritten Arabic documents, one of the hardest scripts for machines to recognise.",
+  results: [
+    { value: "96%+", label: "character recognition rate with a Swin Transformer V2 and BERT encoder-decoder" },
+    { value: "81.66%", label: "text-detection precision, 79.0% F-measure, using a fine-tuned ResNet-50 with Differentiable Binarization" },
+  ],
+  extra:
+    "I also built the synthetic data generation and augmentation pipelines that got around the lack of training data and OCR sequence-length limits.",
+  code: "https://github.com/Hedrax/AHDoc",
 };
 
-export const projects: Project[] = [
+export const publications = [
   {
-    title: "AHDoc — Arabic Handwritten Document OCR",
-    subtitle:
-      "End-to-end OCR system converting Arabic handwritten documents into structured CSV output · IEEE Published",
-    period: "Sep 2024",
-    tags: ["Python", "Deep Learning", "Swin v2", "BERT", "ResNet-50"],
-    highlight: "96%+ CRR",
-    bullets: [
-      "Achieved 96%+ Character Recognition Rate (CRR) using a Swin Transformer v2 – BERT vision encoder-decoder architecture trained with custom data augmentation and transfer learning strategies.",
-      "Fine-tuned a word detection model using Differentiable Binarization + Adaptive Scale Fusion (ResNet-50 backbone), reaching 81.66% precision and 79.0% F-measure on Arabic line segmentation — competitive with state-of-the-art benchmarks.",
-      "Engineered automated data generation and augmentation pipelines; applied transfer learning to overcome OCR sequence-length constraints during training.",
-      "Research published at IEEE NILES 2024 conference (DOI: 10.1109/niles63360.2024.10753216).",
-    ],
-    paper: "https://doi.org/10.1109/niles63360.2024.10753216",
-    arxiv: "https://arxiv.org/abs/2502.05277",
-    github: "https://github.com/Hedrax/AHDoc",
-  },
-  {
-    title: "RAG Knowledge-Base Chatbot",
-    subtitle:
-      "Document-grounded AI chatbot with PDF ingestion, vector retrieval, and a FastAPI + Streamlit stack",
-    period: "Feb 2025",
-    tags: ["Python", "LangChain", "ChromaDB", "FastAPI", "Streamlit", "Docker"],
-    bullets: [
-      "Built an end-to-end RAG pipeline: PDF text extraction, embedding, and storage in a ChromaDB vector store for efficient semantic retrieval.",
-      "Supports multiple LLM providers (OpenAI, Gemini, DeepSeek) behind one interface, with answers constrained strictly to the supplied knowledge base to prevent hallucination.",
-      "Packaged as a FastAPI backend with a Streamlit UI, deployable via Python or Docker.",
-    ],
-    github: "https://github.com/AliFeteha/Chatbot",
-  },
-  {
-    title: "MBTI Personality Classifier",
-    subtitle: "NLP classification system predicting 16 MBTI personality types from social text data",
-    period: "Nov 2023 – Jun 2024",
-    tags: ["Python", "NLP", "BERT", "LSTM", "CBOW", "Scikit-learn"],
-    highlight: "80% accuracy",
-    bullets: [
-      "Benchmarked three architectures end-to-end: LSTM (73%), CBOW (76%), and fine-tuned BERT (80% accuracy) — demonstrating strong command of transformer fine-tuning and NLP evaluation methodology.",
-    ],
-    github: "https://github.com/Hedrax/16-MBTI-Prediction-Based-On-Social-Text",
-  },
-  {
-    title: "ImgVox — 2D to 3D Voxel Reconstruction",
-    subtitle: "On-device 3D reconstruction from 2D images deployed via PyTorch Mobile",
-    period: "Feb 2023 – Apr 2023",
-    tags: ["Python", "PyTorch", "PyTorch Mobile", "3D AutoEncoder"],
-    bullets: [
-      "Trained a 3D AutoEncoder for voxel grid reconstruction; optimized and exported model as .ptl files using PyTorch Mobile for local inference on mobile devices — demonstrating full ML deployment lifecycle.",
-    ],
-    github: "https://github.com/Hedrax/ImgVox",
-  },
-  {
-    title: "NetworkGraphI — Twitter Network Analysis",
-    subtitle: "Large-scale social network analysis across 500K+ Twitter accounts",
-    period: "Mar 2023 – Apr 2023",
-    tags: ["Java", "Selenium", "JUNG", "SQLite", "Multi-threading"],
-    highlight: "500K+ accounts",
-    bullets: [
-      "Built a multi-threaded Selenium scraper in Java to crawl 500K+ account connections; applied graph analysis algorithms (JUNG) to reveal structural patterns and community relationships in the network.",
-    ],
-    github: "https://github.com/Hedrax/NetworkGraphI",
-  },
-  {
-    title: "Grocery Shopping App",
-    subtitle: "Full-stack Android e-commerce application with remote/local caching strategy",
-    period: "Oct 2023 – Dec 2023",
-    tags: ["Kotlin", "Android", "MVVM", "PostgreSQL", "SQLite"],
-    bullets: [
-      "Built from scratch with MVVM + coroutines, implementing advanced authentication, secure key management, and a dual remote/local caching architecture for responsive, offline-capable UX.",
-    ],
-    // github: "", // TODO: add repo URL once published on GitHub
-  },
-];
-
-export type Publication = {
-  badge: string;
-  authors: string;
-  year: string;
-  title: string;
-  venue: string;
-  doi: string;
-  link: string;
-  note?: string;
-};
-
-export const publications: Publication[] = [
-  {
-    badge: "arXiv Preprint · Feb 2025",
-    authors: "Waly, A., Tarek, B., Feteha, A., Yehia, R., Amr, G., Gomaa, W., & Fares, A.",
-    year: "2025",
-    title: "Invizo: Arabic Handwritten Document Optical Character Recognition Solution",
-    venue: "arXiv preprint, arXiv:2502.05277 [cs.CV]",
-    doi: "10.48550/arXiv.2502.05277",
-    link: "https://arxiv.org/abs/2502.05277",
-    note: "End-to-end Arabic OCR combining CNN-based feature extraction with Transformer sequence modeling — 0.59% CER on printed text and 7.91% CER on handwritten text.",
-  },
-  {
-    badge: "IEEE NILES 2024 · Peer-reviewed",
+    venue: "IEEE NILES 2024, peer-reviewed",
+    title: "Arabic handwritten document OCR solution with binarization and adaptive scale fusion detection",
     authors: "Waly, A., Tarek, B., Feteha, A., Yehia, R., Amr, G., & Fares, A.",
-    year: "2024",
-    title:
-      "Arabic handwritten document OCR solution with binarization and adaptive scale fusion detection",
-    venue:
-      "2024 6th Novel Intelligent and Leading Emerging Sciences Conference (NILES), pp. 316–319",
-    doi: "10.1109/niles63360.2024.10753216",
     link: "https://doi.org/10.1109/niles63360.2024.10753216",
+    linkLabel: "Read on IEEE",
+  },
+  {
+    venue: "arXiv preprint, 2025",
+    title: "Invizo: Arabic Handwritten Document Optical Character Recognition Solution",
+    authors: "Waly, A., Tarek, B., Feteha, A., Yehia, R., Amr, G., Gomaa, W., & Fares, A.",
+    link: "https://arxiv.org/abs/2502.05277",
+    linkLabel: "Read on arXiv",
   },
 ];
 
-export const skills: { category: string; items: string[] }[] = [
+export const experience = [
   {
-    category: "AI & Machine Learning",
-    items: [
-      "Generative AI",
-      "Agentic AI",
-      "Multi-Agent Systems",
-      "Large Language Models (LLMs)",
-      "RAG Pipelines",
-      "LLM Fine-tuning & Evaluation",
-      "NLP",
-      "Computer Vision",
-      "OCR",
-      "Deep Learning",
-      "Transfer Learning",
-      "MLOps",
+    role: "AI & Software Engineer",
+    org: "Applab",
+    place: "Doha, Qatar",
+    period: "Apr 2025 – now",
+    points: [
+      "Delivered 5+ AI projects into production: conversational platforms, multi-agent systems, RAG applications and workflow automation.",
+      "Work with business teams from day one to shape AI use cases, estimate timelines and effort, and check the cloud architecture is ready.",
+      "Run R&D on hard problems, prototyping several approaches before committing, and build proofs of concept for new client projects.",
+      "Review code and proposed solutions from junior and associate developers and help them get unstuck.",
     ],
   },
   {
-    category: "Frameworks & Libraries",
-    items: [
-      "Semantic Kernel",
-      "LangChain",
-      "PyTorch",
-      "TensorFlow",
-      "Keras",
-      "Scikit-learn",
-      "OpenCV",
-      "FastAPI",
-      "Hugging Face Transformers",
-    ],
+    role: "B.Sc. Computer Science and Engineering",
+    org: "Egypt-Japan University of Science and Technology",
+    place: "Alexandria, Egypt",
+    period: "Graduated Feb 2025",
+    points: ["Grade: Very Good. Graduation project on Arabic handwritten OCR, published at IEEE NILES 2024."],
   },
   {
-    category: "Azure & Cloud",
-    items: [
-      "Azure AI Services",
-      "Azure AI Search",
-      "Azure Container Apps",
-      "Azure Functions",
-      "Azure App Services",
-      "Azure Speech Services",
-      "Azure Storage",
-      "Microsoft Graph API",
-      "SharePoint SDK",
-      "Copilot Studio",
-      "Power Automate",
-    ],
-  },
-  {
-    category: "Programming Languages",
-    items: ["Python", "C++", "Java", "Kotlin", "SQL"],
-  },
-  {
-    category: "Engineering Practices",
-    items: [
-      "REST API design",
-      "Data Pipelines",
-      "Web Scraping",
-      "DevOps",
-      "MVVM / MVC / MVP",
-      "Distributed Systems",
-      "Database Design",
-      "Git",
-      "Unix/Linux",
-    ],
+    role: "Accountant & Technical Office Engineer",
+    org: "Hassan Aly Hassan Association for Contracting",
+    place: "Alexandria, Egypt",
+    period: "May 2020 – Feb 2025",
+    points: ["Ran finance tasks and supported the technical office, including quantity analysis across construction projects, alongside my degree."],
   },
 ];
 
-export type Certification = {
-  title: string;
-  issuer: string;
-  date: string;
-  detail: string;
-  /** Credential verification URL (rendered as a "Verify" link) */
-  link?: string;
+export const sideProjects = [
+  {
+    title: "RAG knowledge-base chatbot",
+    detail: "PDF ingestion, ChromaDB retrieval and swappable LLM providers behind a FastAPI and Streamlit app.",
+    link: "https://github.com/AliFeteha/Chatbot",
+  },
+  {
+    title: "MBTI personality classifier",
+    detail: "Predicts 16 personality types from social text; fine-tuned BERT reached 80% against 73% for LSTM.",
+    link: "https://github.com/Hedrax/16-MBTI-Prediction-Based-On-Social-Text",
+  },
+  {
+    title: "ImgVox",
+    detail: "3D voxel reconstruction from a single image, running on-device with PyTorch Mobile.",
+    link: "https://github.com/Hedrax/ImgVox",
+  },
+  {
+    title: "NetworkGraphI",
+    detail: "Multi-threaded crawler and graph analysis across 500K+ Twitter account connections.",
+    link: "https://github.com/Hedrax/NetworkGraphI",
+  },
+];
+
+export const credentials = [
+  { title: "Microsoft Certified: Azure AI Engineer Associate (AI-102)", date: "Sep 2025" },
+  { title: "Retrieval Augmented Generation with LangChain, DataCamp", date: "2025" },
+  { title: "Advanced Android Development Nanodegree, Udacity", date: "2022" },
+];
+
+/** What I do, each backed by the projects that show it. */
+export const capabilities: { id: string; label: string; detail: string }[] = [
+  { id: "rag", label: "Retrieval (RAG)", detail: "Grounded answers over large, changing document sets" },
+  { id: "multi-agent", label: "Multi-agent systems", detail: "Routers and specialist agents that split the work" },
+  { id: "tool-calling", label: "Tool calling", detail: "Agents that take real actions through backend APIs" },
+  { id: "voice", label: "Voice and avatars", detail: "Real-time speech and avatar conversations" },
+  { id: "evaluation", label: "LLM evaluation", detail: "Automated checks that prove an agent behaves" },
+  { id: "pipelines", label: "Ingestion pipelines", detail: "Extraction, OCR, translation and incremental indexing" },
+  { id: "permissions", label: "Permission-aware AI", detail: "Answers limited to what each user may see" },
+  { id: "bilingual", label: "Arabic and English", detail: "Bilingual retrieval and answers" },
+  { id: "delivery", label: "Technical leadership", detail: "Leading delivery and guiding developers" },
+];
+
+/** Tools, grouped. Usage links are worked out from each project's stack. */
+export const toolGroups: { group: string; tools: string[] }[] = [
+  { group: "Agent frameworks", tools: ["Microsoft Agent Framework", "Semantic Kernel", "LangChain", "Copilot Studio"] },
+  { group: "Azure AI", tools: ["Azure OpenAI", "Azure AI Search", "Microsoft Foundry", "Azure AI Speech", "Azure Document Intelligence"] },
+  { group: "Cloud and Microsoft 365", tools: ["Azure Functions", "Azure App Service", "Azure Container Apps", "Azure Cosmos DB", "SharePoint", "Microsoft Graph", "Power Automate", "Power Apps"] },
+  { group: "Backend and real-time", tools: ["Python", "FastAPI", "SQL", "REST APIs", "WebRTC", "WebSockets", "Docker", "Git", "Azure DevOps"] },
+  { group: "Machine learning", tools: ["PyTorch", "TensorFlow", "Scikit-learn", "Swin Transformer V2", "BERT", "ResNet-50"] },
+];
+
+/** Research and side work also count as evidence for tools. */
+export const otherEvidence: Record<string, { label: string; href: string }[]> = {
+  PyTorch: [{ label: "AHDoc", href: "/research/" }],
+  "Swin Transformer V2": [{ label: "AHDoc", href: "/research/" }],
+  BERT: [{ label: "AHDoc", href: "/research/" }, { label: "MBTI classifier", href: "https://github.com/Hedrax/16-MBTI-Prediction-Based-On-Social-Text" }],
+  "ResNet-50": [{ label: "AHDoc", href: "/research/" }],
+  FastAPI: [{ label: "RAG chatbot", href: "https://github.com/AliFeteha/Chatbot" }],
+  Docker: [{ label: "RAG chatbot", href: "https://github.com/AliFeteha/Chatbot" }],
+  "Scikit-learn": [{ label: "MBTI classifier", href: "https://github.com/Hedrax/16-MBTI-Prediction-Based-On-Social-Text" }],
 };
 
-export const certifications: Certification[] = [
-  {
-    title: "Microsoft Certified: Azure AI Engineer Associate (AI-102)",
-    issuer: "Microsoft",
-    date: "Sep 2025",
-    detail: "Azure AI solution design, Cognitive Services, Azure AI Search, Bot Service",
-    // link: "", // TODO: add Microsoft Learn credential URL (learn.microsoft.com/en-us/users/<you>/credentials)
-  },
-  {
-    title: "Retrieval Augmented Generation (RAG) with LangChain",
-    issuer: "DataCamp",
-    date: "Feb 2025",
-    detail: "RAG architecture, vector retrieval, LangChain orchestration",
-  },
-  {
-    title: "ChatGPT Prompt Engineering for Developers",
-    issuer: "DataCamp",
-    date: "Sep 2024",
-    detail: "Prompt engineering patterns, chain-of-thought, few-shot techniques",
-  },
-  {
-    title: "Developing Large Language Models",
-    issuer: "DataCamp",
-    date: "Aug 2024",
-    detail: "LLM training, LLMOps, 4 courses + 1 project",
-  },
-  {
-    title: "Deep Learning in Python",
-    issuer: "DataCamp",
-    date: "Aug 2024",
-    detail: "PyTorch, neural networks, 4 courses + 1 project",
-  },
-  {
-    title: "Advanced Android Development Nano-Degree",
-    issuer: "Udacity",
-    date: "Sep – Dec 2022",
-    detail: "Kotlin, Android Architecture, Agile, 7 chapters + projects",
-  },
-];
-
-export const education = {
-  school: "Egypt-Japan University of Science and Technology (EJUST)",
-  url: "https://www.ejust.edu.eg",
-  degree: "B.Sc. in Computer Science and Engineering",
-  grade: "Very Good",
-  period: "Sep 2020 – Feb 2025",
-  location: "Alexandria, Egypt",
-  thesis:
-    "Graduation Thesis: Arabic Handwritten Document OCR — achieved 96%+ CRR; published at IEEE NILES 2024",
-};
-
-export const achievements = [
-  {
-    stat: "96%+",
-    label: "Character Recognition Rate",
-    detail: "On Arabic handwritten OCR — published at IEEE NILES 2024",
-  },
-  {
-    stat: "2",
-    label: "Research Publications",
-    detail: "IEEE NILES 2024 paper + Invizo arXiv preprint (2025) on Arabic OCR",
-  },
-  {
-    stat: "AI-102",
-    label: "Microsoft Certified",
-    detail: "Azure AI Engineer Associate — production Azure AI platform engineering",
-  },
-  {
-    stat: "5+ yrs",
-    label: "Combined Experience",
-    detail: "Designing and deploying production-grade intelligent systems",
-  },
-  {
-    stat: "500K+",
-    label: "Accounts Analyzed",
-    detail: "Large-scale Twitter network graph analysis with multi-threaded crawling",
-  },
-  {
-    stat: "80%",
-    label: "BERT Accuracy",
-    detail: "MBTI personality classification — benchmarked vs. LSTM and CBOW",
-  },
-];
-
-export const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Publications", href: "#publications" },
-  { label: "Skills", href: "#skills" },
-  { label: "Education", href: "#education" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "Contact", href: "#contact" },
-];
+export function evidenceFor(tool: string) {
+  const fromWork = delivered
+    .filter((d) => d.stack.includes(tool))
+    .map((d) => ({ label: d.short, href: `/work/${d.slug}/` }));
+  return [...fromWork, ...(otherEvidence[tool] ?? [])];
+}
