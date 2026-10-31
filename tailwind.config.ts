@@ -1,17 +1,26 @@
 import type { Config } from "tailwindcss";
 
+const v = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 const config: Config = {
-  darkMode: "class",
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      colors: {
+        bg: v("bg"),
+        surface: v("surface"),
+        ink: v("ink"),
+        muted: v("muted"),
+        line: v("line"),
+        accent: v("accent"),
+        sand: v("sand"),
+      },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-grotesk)", "system-ui", "sans-serif"],
+        sans: ['"IBM Plex Sans"', '"IBM Plex Sans Arabic"', "system-ui", "sans-serif"],
+        display: ['"Bricolage Grotesque"', '"IBM Plex Sans"', "system-ui", "sans-serif"],
+        mono: ['"IBM Plex Mono"', '"IBM Plex Sans Arabic"', "ui-monospace", "monospace"],
       },
-      animation: {
-        "pulse-slow": "pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      },
+      maxWidth: { page: "72rem" },
     },
   },
   plugins: [],
